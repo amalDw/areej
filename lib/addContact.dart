@@ -2,6 +2,7 @@ import 'package:areej/contactModel.dart';
 import 'package:areej/displayContacts.dart';
 import 'package:areej/myProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class AddContact extends StatefulWidget {
@@ -30,7 +31,7 @@ class _AddContactState extends State<AddContact> {
                       EdgeInsets.symmetric(vertical: 5, horizontal: 10)),
             ),
             TextField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               controller: lastNameController,
               decoration: InputDecoration(
                   labelText: 'last name',
@@ -46,7 +47,7 @@ class _AddContactState extends State<AddContact> {
                       EdgeInsets.symmetric(vertical: 5, horizontal: 10)),
             ),
             TextField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               controller: secondphoneController,
               decoration: InputDecoration(
                   labelText: 'second phone',
@@ -55,18 +56,30 @@ class _AddContactState extends State<AddContact> {
             ),
             FlatButton(
                 onPressed: () {
-                  contactprov.addContact(ContactModel(
+                 if((firstNameController.text)!=''&&  (lastNameController.text)!='' && (firstphoneController.text)!=''){
+                      contactprov.addContact(ContactModel(
                     firstName: firstNameController.text,
                     lastName : lastNameController.text,
                     firstPhone:  firstphoneController.text,
                     lastPhone:  secondphoneController.text==null?'':secondphoneController.text,
                      ));
-                  print(
-                      contactprov.cont[contactprov.cont.length - 1].firstName);
+               
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => DisplayContacts()));
+                 }
+                 else{
+                   Fluttertoast.showToast(
+        msg: "please check that you write at least the first lasst and a first phone number",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.cyan,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+                 }
                 },
                 child: Text('add'))
           ],

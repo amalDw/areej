@@ -2,6 +2,7 @@ import 'package:areej/contactModel.dart';
 import 'package:areej/displayContacts.dart';
 import 'package:areej/myProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class EditContact extends StatefulWidget {
@@ -17,12 +18,15 @@ class _EditContactState extends State<EditContact> {
   final secondphoneController = TextEditingController();
   Widget build(BuildContext context) {
     var contactprov = Provider.of<HomeProvider>(context);
-   
-       
-      firstNameController.text =  '${contactprov.cont[contactprov.choosenIndex].firstName}';
-      lastNameController.text = '${contactprov.cont[contactprov.choosenIndex].lastName}';
-       firstphoneController.text = '${contactprov.cont[contactprov.choosenIndex].firstPhone}';
-      secondphoneController.text =  '${contactprov.cont[contactprov.choosenIndex].lastPhone}';
+
+    firstNameController.text =
+        '${contactprov.cont[contactprov.choosenIndex].firstName}';
+    lastNameController.text =
+        '${contactprov.cont[contactprov.choosenIndex].lastName}';
+    firstphoneController.text =
+        '${contactprov.cont[contactprov.choosenIndex].firstPhone}';
+    secondphoneController.text =
+        '${contactprov.cont[contactprov.choosenIndex].lastPhone}';
     return Scaffold(
       body: Container(
         child: Column(
@@ -59,22 +63,42 @@ class _EditContactState extends State<EditContact> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 5, horizontal: 10)),
             ),
-            FlatButton(
+            TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.blue,
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
                 onPressed: () {
-                  contactprov.editContact(ContactModel(
-                    firstName: firstNameController.text,
-                    lastName: lastNameController.text,
-                    firstPhone: firstphoneController.text,
-                    lastPhone: secondphoneController.text == null
-                        ? ''
-                        : secondphoneController.text,
-                  ));
-                  print(
-                      contactprov.cont[contactprov.cont.length - 1].firstName);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DisplayContacts()));
+                  if ((firstNameController.text) != '' &&
+                      (lastNameController.text) != '' &&
+                      (firstphoneController.text) != '') {
+                    contactprov.editContact(ContactModel(
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      firstPhone: firstphoneController.text,
+                      lastPhone: secondphoneController.text == null
+                          ? ''
+                          : secondphoneController.text,
+                    ));
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DisplayContacts()));
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "This is Center Short Toast",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
                 },
                 child: Text('Edit'))
           ],

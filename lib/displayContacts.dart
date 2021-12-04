@@ -61,6 +61,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                   showDialog<String>(
                                       context: context,
                                       builder: (BuildContext) => AlertDialog(
+                                        
                                             actionsPadding: EdgeInsets.all(7),
                                             title: Text(
                                                 '${contact.firstName} ${contact.lastName}'),
@@ -72,6 +73,16 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                             ),
                                             actions: <Widget>[
                                               TextButton(
+                                                style: TextButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    backgroundColor: Colors.blue,
+                                                    
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                        
+                                                    ),
+                                                  ),
                                                   onPressed: () {
                                                     final x = index;
                                                     contactListDisplay
@@ -85,6 +96,16 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                                   },
                                                   child: Text('edit')),
                                               TextButton(
+                                                style: TextButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    backgroundColor: Colors.blue,
+                                                    
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                        
+                                                    ),
+                                                  ),
                                                   onPressed: () {
                                                     contactListDisplay
                                                         .deleteContact(index);
@@ -93,6 +114,16 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                                   },
                                                   child: Text('Delete')),
                                               TextButton(
+                                                style: TextButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    backgroundColor: Colors.blue,
+                                                    
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                        
+                                                    ),
+                                                  ),
                                                   onPressed: () {
                                                     Navigator.pop(context, 'close');
                                                   },
