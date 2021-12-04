@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditContact extends StatefulWidget {
-  
   @override
   _EditContactState createState() => _EditContactState();
 }
@@ -18,6 +17,12 @@ class _EditContactState extends State<EditContact> {
   final secondphoneController = TextEditingController();
   Widget build(BuildContext context) {
     var contactprov = Provider.of<HomeProvider>(context);
+   
+       
+      firstNameController.text =  '${contactprov.cont[contactprov.choosenIndex].firstName}';
+      lastNameController.text = '${contactprov.cont[contactprov.choosenIndex].lastName}';
+       firstphoneController.text = '${contactprov.cont[contactprov.choosenIndex].firstPhone}';
+      secondphoneController.text =  '${contactprov.cont[contactprov.choosenIndex].lastPhone}';
     return Scaffold(
       body: Container(
         child: Column(
@@ -56,12 +61,14 @@ class _EditContactState extends State<EditContact> {
             ),
             FlatButton(
                 onPressed: () {
-                  contactprov.addContact(ContactModel(
+                  contactprov.editContact(ContactModel(
                     firstName: firstNameController.text,
-                    lastName : lastNameController.text,
-                    firstPhone:  firstphoneController.text,
-                    lastPhone:  secondphoneController.text==null?'':secondphoneController.text,
-                     ));
+                    lastName: lastNameController.text,
+                    firstPhone: firstphoneController.text,
+                    lastPhone: secondphoneController.text == null
+                        ? ''
+                        : secondphoneController.text,
+                  ));
                   print(
                       contactprov.cont[contactprov.cont.length - 1].firstName);
                   Navigator.push(
@@ -69,7 +76,7 @@ class _EditContactState extends State<EditContact> {
                       MaterialPageRoute(
                           builder: (context) => DisplayContacts()));
                 },
-                child: Text('add'))
+                child: Text('Edit'))
           ],
         ),
       ),
