@@ -10,7 +10,7 @@ void main() {
   runApp(ChangeNotifierProvider<HomeProvider>(
     create: (context) => HomeProvider(),
     child: MaterialApp(
-      home: AddContact(),
+      home: DisplayContacts(),
     ),
   ));
 }
