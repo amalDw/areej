@@ -61,7 +61,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                   showDialog<String>(
                                       context: context,
                                       builder: (BuildContext) => AlertDialog(
-                                        
+
                                             actionsPadding: EdgeInsets.all(7),
                                             title: Text(
                                                 '${contact.firstName} ${contact.lastName}'),
@@ -88,7 +88,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
                                                     contactListDisplay
                                                         .choosenIndex = x;
                                                     print(x);
-                                                    Navigator.push(
+                                                    Navigator.pushReplacement(
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>

@@ -63,44 +63,47 @@ class _EditContactState extends State<EditContact> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 5, horizontal: 10)),
             ),
-            TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.blue,
-                  textStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.blue,
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  if ((firstNameController.text) != '' &&
-                      (lastNameController.text) != '' &&
-                      (firstphoneController.text) != '') {
-                    contactprov.editContact(ContactModel(
-                      firstName: firstNameController.text,
-                      lastName: lastNameController.text,
-                      firstPhone: firstphoneController.text,
-                      lastPhone: secondphoneController.text == null
-                          ? ''
-                          : secondphoneController.text,
-                    ));
+                  onPressed: () {
+                    if ((firstNameController.text) != '' &&
+                        (lastNameController.text) != '' &&
+                        (firstphoneController.text) != '') {
+                      contactprov.editContact(ContactModel(
+                        firstName: firstNameController.text,
+                        lastName: lastNameController.text,
+                        firstPhone: firstphoneController.text,
+                        lastPhone: secondphoneController.text == null
+                            ? ''
+                            : secondphoneController.text,
+                      ));
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DisplayContacts()));
-                  } else {
-                    Fluttertoast.showToast(
-                        msg: "This is Center Short Toast",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  }
-                },
-                child: Text('Edit'))
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DisplayContacts()));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "please make sure to fill first,last name and first phone number",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 4,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    }
+                  },
+                  child: Text('Edit')),
+            )
           ],
         ),
       ),

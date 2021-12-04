@@ -54,34 +54,48 @@ class _AddContactState extends State<AddContact> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 5, horizontal: 10)),
             ),
-            FlatButton(
-                onPressed: () {
-                 if((firstNameController.text)!=''&&  (lastNameController.text)!='' && (firstphoneController.text)!=''){
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.teal,
+                    textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  onPressed: () {
+                    if ((firstNameController.text) != '' &&
+                        (lastNameController.text) != '' &&
+                        (firstphoneController.text) != '') {
                       contactprov.addContact(ContactModel(
-                    firstName: firstNameController.text,
-                    lastName : lastNameController.text,
-                    firstPhone:  firstphoneController.text,
-                    lastPhone:  secondphoneController.text==null?'':secondphoneController.text,
-                     ));
-               
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DisplayContacts()));
-                 }
-                 else{
-                   Fluttertoast.showToast(
-        msg: "please check that you write at least the first lasst and a first phone number",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.cyan,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-                 }
-                },
-                child: Text('add'))
+                        firstName: firstNameController.text,
+                        lastName: lastNameController.text,
+                        firstPhone: firstphoneController.text,
+                        lastPhone: secondphoneController.text == null
+                            ? ''
+                            : secondphoneController.text,
+                      ));
+
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DisplayContacts()));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg:
+                              "please check that you write at least the first lasst and a first phone number",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.cyan,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    }
+                  },
+                  child: Text('add')),
+            ),
           ],
         ),
       ),
