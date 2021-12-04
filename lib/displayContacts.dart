@@ -16,6 +16,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
     final List<ContactModel> contactList1 = contactListDisplay.cont;
 
     return Scaffold(
+      appBar: AppBar(title: Text('Contact List'),),
       body: (contactList1.length == 0 || contactList1 == null)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,69 +50,76 @@ class _DisplayContactsState extends State<DisplayContacts> {
                   children: [
                     Expanded(
                       flex: 9,
-                      child: ListView.builder(
-                          itemCount: contactList1.length,
-                          itemBuilder: (context, index) {
-                            final contact = contactList1[index];
-                            return GestureDetector(
-                              onTap: () {
-                                showDialog<String>(
-                                    context: context,
-                                    builder: (BuildContext) => AlertDialog(
-                                          actionsPadding: EdgeInsets.all(7),
-                                          title: Text(
-                                              '${contact.firstName} ${contact.lastName}'),
-                                          content: Column(
-                                            children: [
-                                              Text('${contact.firstPhone}'),
-                                              Text('${contact.lastPhone}'),
+                      child: Container(
+                        margin: EdgeInsets.all(4),
+                        child: ListView.builder(
+                            itemCount: contactList1.length,
+                            itemBuilder: (context, index) {
+                              final contact = contactList1[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext) => AlertDialog(
+                                            actionsPadding: EdgeInsets.all(7),
+                                            title: Text(
+                                                '${contact.firstName} ${contact.lastName}'),
+                                            content: Column(
+                                              children: [
+                                                Text('${contact.firstPhone}'),
+                                                Text('${contact.lastPhone}'),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                  onPressed: () {
+                                                    final x = index;
+                                                    contactListDisplay
+                                                        .choosenIndex = x;
+                                                    print(x);
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditContact()));
+                                                  },
+                                                  child: Text('edit')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    contactListDisplay
+                                                        .deleteContact(index);
+                                                    Navigator.pop(
+                                                        context, 'Delete');
+                                                  },
+                                                  child: Text('Delete')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context, 'close');
+                                                  },
+                                                  child: Text('close')),
                                             ],
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                                onPressed: () {
-                                                  final x = index;
-                                                  contactListDisplay
-                                                      .choosenIndex = x;
-                                                  print(x);
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              EditContact()));
-                                                },
-                                                child: Text('edit')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  contactListDisplay
-                                                      .deleteContact(index);
-                                                  Navigator.pop(
-                                                      context, 'Delete');
-                                                },
-                                                child: Text('Delete')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context, 'close');
-                                                },
-                                                child: Text('close')),
-                                          ],
-                                        ));
-                              },
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  child: Text(
-                                      '${contact.firstName[0].toUpperCase()}'),
+                                          ));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(5),
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      child: Text(
+                                          '${contact.firstName[0].toUpperCase()}'),
+                                    ),
+                                    title: Text(
+                                        '${contact.firstName} ${contact.lastName}'),
+                                  ),
                                 ),
-                                title: Text(
-                                    '${contact.firstName} ${contact.lastName}'),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                      ),
                     ),
                     Expanded(
                         flex: 1,
                         child: Container(
                           alignment: Alignment.bottomRight,
+                          margin: EdgeInsets.fromLTRB(0, 0, 20, 20),
                           child: FloatingActionButton(
                             onPressed: () {
                               Navigator.push(
