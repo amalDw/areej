@@ -67,7 +67,7 @@ class _EditContactState extends State<EditContact> {
               margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                  //  backgroundColor: Colors.blue,
                     textStyle: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
