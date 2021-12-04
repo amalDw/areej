@@ -67,7 +67,6 @@ class _EditContactState extends State<EditContact> {
               margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.white,
                     backgroundColor: Colors.blue,
                     textStyle: TextStyle(
                       color: Colors.white,
@@ -103,7 +102,18 @@ class _EditContactState extends State<EditContact> {
                     }
                   },
                   child: Text('Edit')),
-            )
+            ),
+              Container(
+              child: SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('close'),
+                ),
+              ),)
           ],
         ),
       ),

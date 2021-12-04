@@ -62,8 +62,9 @@ class _AddContactState extends State<AddContact> {
                     primary: Colors.teal,
                     textStyle: TextStyle(
                         color: Colors.black,
+                        backgroundColor: Colors.blue,
                         fontSize: 40,
-                        fontStyle: FontStyle.italic),
+                        ),
                   ),
                   onPressed: () {
                     if ((firstNameController.text) != '' &&
@@ -96,6 +97,18 @@ class _AddContactState extends State<AddContact> {
                   },
                   child: Text('add')),
             ),
+            Container(
+              child: SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('close'),
+                ),
+              ),
+            )
           ],
         ),
       ),
