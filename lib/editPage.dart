@@ -4,12 +4,13 @@ import 'package:areej/myProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AddContact extends StatefulWidget {
+class EditContact extends StatefulWidget {
+  
   @override
-  _AddContactState createState() => _AddContactState();
+  _EditContactState createState() => _EditContactState();
 }
 
-class _AddContactState extends State<AddContact> {
+class _EditContactState extends State<EditContact> {
   @override
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
